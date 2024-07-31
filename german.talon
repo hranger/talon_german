@@ -1,16 +1,6 @@
 mode: user.german
 language: de_DE
 -
-settings():
-	user.context_sensitive_dictation_german = 1
-    speech.timeout = 0.400
-
-# idea: allow to directly chain commands
-# how about using 'ego' (as in jp 'eigo')?
-^(englisch | english | ego | aygo | pego | hey ingo)$:
-	mode.disable("user.german")
-	mode.enable("command")
-
 # Why copy and paste this to here? Ensuring these commands apply to the german
 # mode as well should be all that is needed.
 ^sleep all [<phrase>]$:
@@ -29,9 +19,6 @@ settings():
     speech.enable()
     skip()
 
-^german$: skip()
-
-<user.satz>: user.insert(satz)
 
 ^(abkürzung|abkürzungen) <user.acronym>: "{acronym}"
 

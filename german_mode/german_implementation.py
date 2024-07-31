@@ -24,11 +24,11 @@ for word in list_of_words:
 # capitalized
 # Update: Is this really needed or can we just use words_to_replace_de.csv for
 # that?
+# => Yes, just create a command "always capitalize" that automates that entry
 
 _space_after = ".,!?:;)]}–“‘$£€"
 _no_space_before = ".,-!?:;)]}␣“‘’$£€"
 _ascii_replace = {'–': '-', '„': '"', '“': '"', "‚": "'", "‘": "'", "’": "'"}
-_capitalize_after = ".!?"
 
 
 

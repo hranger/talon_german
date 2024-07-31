@@ -13,12 +13,12 @@ mod = Module()
 
 # NOTE: This method requires this module to be one folder below the top-level
 #   community folder.
-SETTINGS_DIR: Path = Path(__file__).parents[1] / "community" / "settings"
+SETTINGS_DIR: Path = Path(__file__).parents[2] / "community" / "settings"
 
 if not SETTINGS_DIR.is_dir():
     os.mkdir(SETTINGS_DIR)
 
-
+# TODO: use talon-list instead
 def get_list_from_csv(
         filename: str, headers: tuple[str, str], default: dict[str, str] = {}
 ):
