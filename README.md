@@ -3,6 +3,8 @@ German Dictation Mode for the beta version subscription of Talon Voice.
 
 This is a fork of earlier setups, adding some improvements.
 
+This version uses that german conformer model instead of vosk. This results in two major benefits: (1) You can add unknown words (2) you no longer have to worry about misrecognitions with commands, since the conformer speech engine knows about the currently defined commands. Basically it now behaves like you got used to from the english speech models.
+
 ## Usage
 Say `german [mode]` to switch from command mode to German dictation mode and `english` / `ego` to switch back.
 Use `nimitz <german phrase>` for single german phrases like you would use `say <english phrase>` (from russian "nemetz" for "german").
@@ -26,11 +28,6 @@ In addition to already existing `gehe rauf / runter / recht / links` for single 
 Some improvements regarding symbols - you can use more symbols and direct dictation now.
 Also added more symbols I frequently used, for example `in Klammern` (` ()`), `Spiegelstrich` (` - `), `Ellipse` (`...`), `Schrägstrich oder` (` / `), `Zeilenumbruch`, `Leerzeichen` ...
 
-### Improved robustness of commands with VOSK
-Since registered commands have no influence on what VOSK detects (talon only gets the result after speech recognition), misdetections for commands can be a lot more common than with conformer.
-I improved robustness of many of the commands by adding many of the common misrecognitions as possible alternatives.
-Unfortunately, this makes my talon file a bit uglier to read, since something like "springe rechts" now turns into "(springe | sprenge | spring | sprang | ... ) rechts"
-
 ### German mode / quick german phrases
 The original setup introduced a way to dictate a quick german phrase while in english mode without having to switch to german mode and back (like a german `say` command).
 This was originally just an improved version of the `german [mode]` command used to change modes (for example `german Hallo Welt` instead of `german <pause> Hallo Welt english <pause>`).
@@ -51,8 +48,8 @@ Currently, the commands use a simple hard-coded path, so you will have to change
 
 
 ### Context sensitive dictation
-Can be activated for german dictation with the setting `user.context_sensitive_dictation_german` (this is separate from the english setting).
-Uses the community peek function, this keeps the behavior consistent and allows to make use of overloaded definitions for applications with special behavior.
+Same as community, use the setting `user.context_sensitive_dictation` to activate / deactivate.
+Uses the implementation from community, so you should get the same functionality.
 
 Context sensitive dictation also applies to `nimitz <phrase>`, which means it is not necessary to add or remove spaces before inserting a german phrase (I find this to be very convenient).
 
@@ -62,7 +59,6 @@ You can control your eye tracker with the commands `Tracking (an | aus | Augen |
 ## Caveats:
 * Only primitive capitalization
 * Punctuation is less smart than in community as well, especially if you do not use context sensitive dictation
-* The usage of vosk limits you to what vosk recognizes - adding words or commands in your talon configuration will not influence vosk itself in any way, so you must match all phrases that vosk might hear (so while you might have to command "springe", Vosk might just as well recognize "spring" or "sprenge" instead).
 * Trying to do `go to sleep` / `talon sleep` while in german mode will have no effect currently. You will have to cycle through sleep / wake however when switching back to english afterwards. Therefore, for sleep you have to switch back to an english mode beforehand, or mute the microphone.
 
 ## Todo:
@@ -77,22 +73,11 @@ You can control your eye tracker with the commands `Tracking (an | aus | Augen |
 ## Dependencies
 This is a plug-in for Talon Voice (https://talonvoice.com/).
 Requires the [talon beta](https://www.patreon.com/lunixbochs) subscription for its support of additional speech engines.
-Assumes the [community command set](https://github.com/talonhub/community) to be present in the talon user directory (for providing the `peek` function for context sensitive dictation and as shared location for the *words_to_replace_de* csv).
+Assumes the [community command set](https://github.com/talonhub/community) to be present in the talon user directory.
 
 ## Setup
-* download the newest German language model from [alphacephei][alphacephei] into `~/.talon/vosk/` or your preferred location:
-  ```
-  mkdir -p ~/.talon/vosk
-  cd ~/.talon/vosk
-  curl -LfSo vosk-model-de.zip https://alphacephei.com/vosk/models/vosk-model-de-0.21.zip
-  unzip vosk-model-de.zip
-  mv vosk-model-de-* vosk-model-de
-  ```
-  Note that there are models in different sizes, you can experiment with that.
-* install vosk into the talon runtime by running `~/.talon/bin/pip install vosk` (on windows `scripts\pip install vosk`)
-* clone this repository into your talon user folder (`~/.talon/user`)
-
-It won't work on mac unless you sign the pip installed library file yourself, or unless aegis ships the vosk kaldi library with talon pre-signed.
+* Clone this repository into your talon user folder (`~/.talon/user`)
+* Download the german conformer engine from talons context menu
 
 ## Related
 Other related projects and repositories:
@@ -100,5 +85,3 @@ Other related projects and repositories:
 
 Also visit the [#language-deutsch](https://talonvoice.slack.com/archives/CURG8FXAQ) channel in the talon slack in case you have any questions or problems.
 
-
-[alphacephei]: https://alphacephei.com/vosk/models
