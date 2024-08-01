@@ -41,8 +41,7 @@ datei speichern: edit.save()
 (kopier|kopiere) das: edit.copy()
 schneide das aus: edit.cut()
 füge das ein: edit.paste()
-mache rückgängig | nop: edit.undo()
-mache rückgängig | nop <user.number_small>:
+(mache rückgängig | nop) [<user.number_small>]:
     edit.undo()
     repeat(number_small - 1)
 nop das: user.clear_last_phrase()
@@ -53,32 +52,24 @@ stelle wieder her: edit.redo()
 #######################################################################
 # to do: use new navigation grammar? (requires recent version of community)
 # small movements
-(geh | gehe) (hoch | rauf): edit.up()
-(geh | gehe) (hoch | rauf) <user.number_small>:
+(geh | gehe) [<user.number_small>] (hoch | rauf):
     edit.up()
     repeat(number_small - 1)
-(geh | gehe) runter: edit.down()
-(geh | gehe) runter <user.number_small>:
+(geh | gehe) [<user.number_small>] runter:
     edit.down()
     repeat(number_small - 1)
-(geh | gehe) links: edit.left()
-(geh | gehe) links <user.number_small>:
+(geh | gehe) [<user.number_small>] links:
     edit.left()
     repeat(number_small - 1)
-(geh | gehe) rechts: edit.right()
-(geh | gehe) rechts <user.number_small>:
+(geh | gehe) [<user.number_small>] rechts:
     edit.right()
     repeat(number_small - 1)
 
 # large movements
-(spring | springe) links:
-    edit.word_left()
-(spring | springe) links <user.number_small>:
+(spring | springe) [<user.number_small>] links:
     edit.word_left()
     repeat(number_small - 1)
-(spring | springe) rechts:
-    edit.word_right()
-(spring | springe) rechts <user.number_small>:
+(spring | springe) [<user.number_small>] rechts:
     edit.word_right()
     repeat(number_small - 1)
 (spring | springe) zeilen anfang: edit.line_start()
@@ -93,14 +84,10 @@ stelle wieder her: edit.redo()
 #######################################################################
 ## Selecting Text
 #######################################################################
-auswählen links:
-    edit.extend_word_left()
-auswählen links <user.number_small>:
+auswählen [<user.number_small>] links:
     edit.extend_word_left()
     repeat(number_small - 1)
-auswählen rechts:
-    edit.extend_word_right()
-auswählen rechts <user.number_small>:
+auswählen [<user.number_small>] rechts:
     edit.extend_word_right()
     repeat(number_small - 1)
 
@@ -112,10 +99,7 @@ auswählen rechts <user.number_small>:
 ^<user.weg> [{user.count}]$: user.smart_delete(weg, "{count or '1'}")
 löschtaste: key("backspace")
 
-lösche links:
-    edit.extend_word_left()
-    edit.delete()
-lösche links <user.number_small>:
+lösche [<user.number_small>] links:
     edit.extend_word_left()
     repeat(number_small - 1)
     edit.delete()
@@ -124,10 +108,7 @@ lösche ganz links:
     edit.delete()
 (entferne) links:
     edit.delete()
-lösche rechts:
-    edit.extend_word_right()
-    edit.delete()
-lösche rechts <user.number_small>:
+lösche [<user.number_small>] rechts:
     edit.extend_word_right()
     repeat(number_small - 1)
     edit.delete()
