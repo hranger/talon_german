@@ -31,7 +31,7 @@ in Anführungszeichen:
 
 großgeschrieben | mach groß:
     edit.select_word()
-    user.formatters_reformat_selection("title")
+    user.formatters_reformat_selection("CAPITALIZE_FIRST_WORD")
 
 #######################################################################
 ## Editor Commands
