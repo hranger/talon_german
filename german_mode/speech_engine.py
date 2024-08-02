@@ -21,7 +21,7 @@ speech_system.register('post:phrase', on_post_phrase)
 @mod.action_class
 class Actions:
 
-    def vosk_recognize_german(phrase: list[str]):
+    def recognize_momentary_german(phrase: list[str]):
         """Replay speech from last phrase into german engine"""
         # NOTE: this is pretty much all considered an experimental API
         # and this script is just for demo purposes, for the beta only

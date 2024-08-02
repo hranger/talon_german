@@ -7,4 +7,4 @@ language: en_US
 ^(english | ego | pego)$: skip()
 
 ^nimitz <phrase>$:
-    user.vosk_recognize_german(phrase)
+    user.recognize_momentary_german(phrase)
