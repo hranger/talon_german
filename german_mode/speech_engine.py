@@ -46,7 +46,9 @@ class Actions:
 				german_text = actions.user.history_get(0)
 				phrase_text = actions.user.history_transform_phrase_text(phrase)
 				command = actions.user.history_get(1).removesuffix(phrase_text)
-				actions.user.history_set(1, command + german_text)
-				actions.user.history_set(0, None)
+				# somehow remove the last two phrases from command history
+				# ideally we would rewrite the command history entry here, but currently there does not seem to be a way to do so
+				# therefore we will leave it as is for now
+				# actions.user.add_phrase_to_history(command + german_text)
 			finally:
 				actions.mode.disable("user.german")
