@@ -43,7 +43,7 @@ schneide das aus: edit.cut()
 füge das ein: edit.paste()
 (mache rückgängig | nop) [<user.number_small>]:
     edit.undo()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 nop das: user.clear_last_phrase()
 stelle wieder her: edit.redo()
 
@@ -54,24 +54,24 @@ stelle wieder her: edit.redo()
 # small movements
 (geh | gehe) [<user.number_small>] (hoch | rauf):
     edit.up()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 (geh | gehe) [<user.number_small>] runter:
     edit.down()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 (geh | gehe) [<user.number_small>] links:
     edit.left()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 (geh | gehe) [<user.number_small>] rechts:
     edit.right()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 
 # large movements
 (spring | springe) [<user.number_small>] links:
     edit.word_left()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 (spring | springe) [<user.number_small>] rechts:
     edit.word_right()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 (spring | springe) zeilen anfang: edit.line_start()
 (spring | springe) ganz links: edit.line_start()
 (spring | springe) heimat: edit.line_start()
@@ -81,15 +81,18 @@ stelle wieder her: edit.redo()
 (spring | springe) ganz rechts: edit.line_end()
 (spring | springe) lend: edit.line_end()
 
+((spring | springe) | (geh | gehe)) (hoch | rauf | runter | links | rechts) <user.number_small>:
+    app.notify("'BEWEGUNG RICHTUNG ANZAHL' order is deprecated.\nUse 'BEWEGUNG ANZAHL RICHTUNG' order instead (same as community 'go three left')!")
+
 #######################################################################
 ## Selecting Text
 #######################################################################
 auswählen [<user.number_small>] links:
     edit.extend_word_left()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 auswählen [<user.number_small>] rechts:
     edit.extend_word_right()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
 
 #######################################################################
 ## Deleting Text
@@ -101,7 +104,7 @@ löschtaste: key("backspace")
 
 lösche [<user.number_small>] links:
     edit.extend_word_left()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
     edit.delete()
 lösche ganz links:
     edit.extend_line_start()
@@ -110,7 +113,7 @@ lösche ganz links:
     edit.delete()
 lösche [<user.number_small>] rechts:
     edit.extend_word_right()
-    repeat(number_small - 1)
+    if number_small or false: repeat(number_small - 1)
     edit.delete()
 lösche ganz rechts:
     edit.extend_line_end()
@@ -118,3 +121,6 @@ lösche ganz rechts:
 (entferne) rechts:
     key("delete")
 lösche zeile: edit.delete_line()
+
+(lösche | auswählen) (links | rechts) <user.number_small>:
+    app.notify("'AKTION RICHTUNG ANZAHL' order is deprecated.\nUse 'AKTION ANZAHL RICHTUNG' order instead (for example 'lösche 3 rechts')!")
