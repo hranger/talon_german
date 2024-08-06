@@ -2,7 +2,13 @@ mode: user.german
 language: de_DE
 -
 settings():
-    user.context_sensitive_dictation = 1
-    speech.timeout = 0.400
+    ################################################
+    # community settings
+    ################################################
+    #speech.timeout = 0.400
+
+    ################################################
+    # settings specific for german mode
+    ################################################
     # Enable proper unicode punctuation
-    user.german_unicode = 1
+    user.german_unicode = true
