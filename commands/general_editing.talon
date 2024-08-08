@@ -41,37 +41,37 @@ datei speichern: edit.save()
 (kopier|kopiere) das: edit.copy()
 schneide das aus: edit.cut()
 füge das ein: edit.paste()
-(mache rückgängig | nop) [<user.number_small>]:
+(mache rückgängig | nop) [<user.repeat_count_small>]:
     edit.undo()
-    if number_small or false: repeat(number_small - 1)
+    repeat(repeat_count_small or 0)
 nop das: user.clear_last_phrase()
 stelle wieder her: edit.redo()
 
 #######################################################################
 ## Navigation
 #######################################################################
-# to do: use new navigation grammar? (requires recent version of community)
+# TODO: use new navigation grammar instead? (requires recent version of community)
 # small movements
-(geh | gehe) [<user.number_small>] (hoch | rauf):
+(geh | gehe) [<user.repeat_count_small>] (hoch | rauf):
     edit.up()
-    if number_small or false: repeat(number_small - 1)
-(geh | gehe) [<user.number_small>] runter:
+    repeat(repeat_count_small or 0)
+(geh | gehe) [<user.repeat_count_small>] runter:
     edit.down()
-    if number_small or false: repeat(number_small - 1)
-(geh | gehe) [<user.number_small>] links:
+    repeat(repeat_count_small or 0)
+(geh | gehe) [<user.repeat_count_small>] links:
     edit.left()
-    if number_small or false: repeat(number_small - 1)
-(geh | gehe) [<user.number_small>] rechts:
+    repeat(repeat_count_small or 0)
+(geh | gehe) [<user.repeat_count_small>] rechts:
     edit.right()
-    if number_small or false: repeat(number_small - 1)
+    repeat(repeat_count_small or 0)
 
 # large movements
-(spring | springe) [<user.number_small>] links:
+(spring | springe) [<user.repeat_count_small>] links:
     edit.word_left()
-    if number_small or false: repeat(number_small - 1)
-(spring | springe) [<user.number_small>] rechts:
+    repeat(repeat_count_small or 0)
+(spring | springe) [<user.repeat_count_small>] rechts:
     edit.word_right()
-    if number_small or false: repeat(number_small - 1)
+    repeat(repeat_count_small or 0)
 (spring | springe) zeilen anfang: edit.line_start()
 (spring | springe) ganz links: edit.line_start()
 (spring | springe) heimat: edit.line_start()
@@ -87,12 +87,12 @@ stelle wieder her: edit.redo()
 #######################################################################
 ## Selecting Text
 #######################################################################
-auswählen [<user.number_small>] links:
+auswählen [<user.repeat_count_small>] links:
     edit.extend_word_left()
-    if number_small or false: repeat(number_small - 1)
-auswählen [<user.number_small>] rechts:
+    repeat(repeat_count_small or 0)
+auswählen [<user.repeat_count_small>] rechts:
     edit.extend_word_right()
-    if number_small or false: repeat(number_small - 1)
+    repeat(repeat_count_small or 0)
 
 #######################################################################
 ## Deleting Text
@@ -102,18 +102,18 @@ auswählen [<user.number_small>] rechts:
 ^<user.weg> [{user.count}]$: user.smart_delete(weg, "{count or '1'}")
 löschtaste: key("backspace")
 
-lösche [<user.number_small>] links:
+lösche [<user.repeat_count_small>] links:
     edit.extend_word_left()
-    if number_small or false: repeat(number_small - 1)
+    repeat(repeat_count_small or 0)
     edit.delete()
 lösche ganz links:
     edit.extend_line_start()
     edit.delete()
 (entferne) links:
     edit.delete()
-lösche [<user.number_small>] rechts:
+lösche [<user.repeat_count_small>] rechts:
     edit.extend_word_right()
-    if number_small or false: repeat(number_small - 1)
+    repeat(repeat_count_small or 0)
     edit.delete()
 lösche ganz rechts:
     edit.extend_line_end()
