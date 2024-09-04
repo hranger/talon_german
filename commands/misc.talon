@@ -11,11 +11,11 @@ language: de_DE
 # back knausj edit_text_file()
 # TODO: just use local settings directory
 bearbeite deutsche wörter:
-    user.edit_text_file("/home/markus/.talon/user/knausj_talon/settings/additional_words_de.csv", "/home/markus/.talon/user/talon_german")
+    user.edit_text_file("/home/herwig/.talon/user/knausj_talon/settings/additional_words_de.csv", "/home/herwig/.talon/user/talon_german")
     sleep(500ms)
     edit.file_end()
 bearbeite deutsche befehle:
-    user.edit_text_file("/home/markus/.talon/user/talon_german/german.talon", "/home/markus/.talon/user/talon_german")
+    user.edit_text_file("/home/herwig/.talon/user/talon_german/german.talon", "/home/herwig/.talon/user/talon_german")
     sleep(500ms)
     edit.file_end()
 
